@@ -1,0 +1,45 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: identity
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - http-gateway
+  http:
+  - name: Login provider
+    match:
+    - uri:
+        prefix: /authn/
+    rewrite:s
+      uri: /
+    route:
+    - destination:
+        port:
+          number: 80
+        host: oidc-login.default.svc.cluster.local
+    corsPolicy: &apiCorsPolicy
+      allowOrigins:
+      - exact: '*'
+      allowMethods:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - OPTIONS
+      allowCredentials: true
+      allowHeaders:
+      - DNT
+  - name: OIDC provider
+    match:
+    - uri:
+        prefix: /oidc/
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        port:
+          number: 4444
+        host: oidc-login.default.svc.cluster.local
+    corsPolicy: *apiCorsPolicy
