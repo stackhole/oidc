@@ -1,0 +1,16 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+metadata:
+  name: oidc
+build:
+  artifacts:
+  - image: localhost:32000/hydra
+    docker:
+      dockerfile: Dockerfile-hydra
+  - image: localhost:32000/oidc
+    docker:
+      dockerfile: Dockerfile
+deploy:
+  kustomize:
+    paths:
+    - kustomize
