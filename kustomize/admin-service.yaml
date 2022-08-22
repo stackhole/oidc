@@ -4,7 +4,7 @@ metadata:
   name: oidc-admin
 spec:
   selector:
-    app: oidc-postgres
+    app: oidc-provider
   ports:
     - protocol: TCP
       name: hydra-admin

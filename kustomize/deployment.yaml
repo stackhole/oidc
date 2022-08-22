@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: oidc-postgres
+  name: oidc-provider
   labels:
-    app: oidc-postgres
+    app: oidc-provider
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: oidc-postgres
+      app: oidc-provider
   template:
     metadata:
       labels:
-        app: oidc-postgres
+        app: oidc-provider
     spec:
       initContainers:
         - name: hydra-migrations
