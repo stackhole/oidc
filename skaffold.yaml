@@ -7,6 +7,9 @@ build:
   - image: localhost:32000/hydra
     docker:
       dockerfile: Dockerfile-hydra
+  - image: localhost:32000/oidc-db
+    docker:
+      dockerfile: Dockerfile-db
   - image: localhost:32000/oidc
     docker:
       dockerfile: Dockerfile
