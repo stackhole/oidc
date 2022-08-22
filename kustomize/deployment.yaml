@@ -17,7 +17,7 @@ spec:
       initContainers:
         - name: postgres-wait
           imagePullPolicy: IfNotPresent
-          image: postgres:14-bullseye
+          image: postgres:14-alpine
           command: ['sh', '-c', 'until pg_isready -h oidc-db.default.svc.cluster.local -u hydra; do echo "waiting"; sleep 5; done']
           env:
             - name: PGPASSWORD
